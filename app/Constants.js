@@ -7,7 +7,7 @@ class Constants {
   }
 
   static get DB_PATH() {
-    return "mongodb://localhost:27017/trio_energia_erp";
+    return "mongodb://localhost:27017/xapps";
   }
 
   static get baseUrl() {

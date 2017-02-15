@@ -6,6 +6,8 @@ const Constants = require('./Constants');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const Connection = require('./models/Connection');
+const TasksRoute = require('./routes/TasksRoute');
+const Tasks = require('./models/Tasks');
 
 class Server {
 
@@ -14,6 +16,8 @@ class Server {
     this.parseUrlencoded = bodyParser.urlencoded({ extended: false });
     this.indexPage = path.join(__dirname, 'views', 'index.ejs');
     this.connection = new Connection();
+    this.tasks = new Tasks();
+    this.tasksRoute = new TasksRoute();
     this.initialize();
   }
 
@@ -33,6 +37,9 @@ class Server {
     this.express.get('/', (request, response) => {
       response.render(this.indexPage);
     });
+
+
+    this.express.get('/tasks', this.tasksRoute.get.bind(this));
 
     this.express.listen(3000);
 

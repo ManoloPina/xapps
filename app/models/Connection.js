@@ -5,6 +5,9 @@ const assert = require('assert');
 const Constants = require('../Constants');
 
 class Connection {
+  constructor() {
+
+  }
 
   connect() {
     return new Promise((resolve, reject) => {
@@ -21,6 +24,16 @@ class Connection {
     this.connect()
     .then(db => {
       db.collection(collection).insertOne(object, this.result(err, result));
+    });
+  }
+
+  find(collection, query) {
+    return new Promise((resolve, reject) => {
+      this.connect().then(db => {
+        db.collection(collection).find(query).toArray((err, docs) => {
+          err ? reject(err) : resolve(docs);
+        });
+      });
     });
   }
 

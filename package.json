@@ -33,6 +33,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "reload": "^1.1.1",
+    "underscore": "^1.8.3",
     "validator": "^6.2.1",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"

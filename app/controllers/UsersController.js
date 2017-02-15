@@ -11,14 +11,13 @@ class UsersController extends React.Component {
   componentDidMount() {
 
     this.getData().then(obj => {
-      console.log('data', obj);
       return new Promise((resolve, reject) => {
         let element = obj.data.map(item => {
           return (
             <tr>
               <td>{item.id}</td>
               <td>{item.first_name} {item.last_name}</td>
-              <td><img src={item.avatar} className="pull-right"/></td>
+              <td><img src={item.avatar} className="pull-right img-thumbnail"/></td>
             </tr>
           );
         });
@@ -98,7 +97,7 @@ class UsersController extends React.Component {
             <tr>
               <td>{item.id}</td>
               <td>{item.first_name} {item.last_name}</td>
-              <td><img src={item.avatar} className="pull-right"/></td>
+              <td><img src={item.avatar} className="pull-right img-thumbnail"/></td>
             </tr>
           );
         });
