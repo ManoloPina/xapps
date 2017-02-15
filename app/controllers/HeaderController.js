@@ -20,7 +20,8 @@
           </div>
 
           <ul className="nav navbar-nav menu">
-           <li><a href="#" data-view="Users">Users</a></li>
+           <li><a data-view="usersController">Users</a></li>
+           <li><a data-view="taskController">Tasks</a></li>
           </ul>
 
         </div>

@@ -154,6 +154,10 @@ class UsersController extends React.Component {
   get $pagination() {
     return $(this.refs.pagination);
   }
+
+  get component() {
+    return <UsersController/>;
+  }
 }
 
 
