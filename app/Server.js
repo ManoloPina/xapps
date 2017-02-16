@@ -40,6 +40,7 @@ class Server {
 
 
     this.express.get('/tasks', this.tasksRoute.get.bind(this));
+    this.express.post('/tasks/store', this.parseUrlencoded, this.tasksRoute.post.bind(this));
 
     this.express.listen(3000);
 

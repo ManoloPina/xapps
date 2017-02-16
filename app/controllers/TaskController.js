@@ -10,8 +10,8 @@ class TaskController extends React.Component {
   }
 
   componentDidMount() {
+
     this.getData().then(data => {
-      console.log(data);
       return new Promise((resolve, reject) => {
         let items = data.map(item => {
           return (
@@ -30,10 +30,12 @@ class TaskController extends React.Component {
       });
     })
     .then(items => {
-      console.log('items', items);
       this.setState({items: items});
-      console.log(this.state.items);
     });
+
+    console.log('store button', this.$storeButoon);
+
+    this.$storeButoon.on('click', this.createTask.bind(this));
   }
 
   render() {
@@ -46,8 +48,28 @@ class TaskController extends React.Component {
     );
   }
 
-  createTask() {
-
+  createTask(event) {
+    event.preventDefault();
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `${Constants.baseUrl}/tasks/store`,
+        type: 'post',
+        data: {
+          task: this.$taskText.val(),
+          status: 'Pendente',
+          created_date: new Date()
+        }
+      })
+      .done(data => {
+        console.log(data);
+        resolve(data);
+      })
+      .fail(err => {
+        reject(err);
+      });
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
   getData() {
@@ -62,6 +84,14 @@ class TaskController extends React.Component {
         reject(err);
       });
     });
+  }
+
+  get $storeButoon() {
+    return $(this.refs.storeButton);
+  }
+
+  get $taskText() {
+    return $(this.refs.taskText);
   }
 
   get listTask() {
@@ -90,11 +120,11 @@ class TaskController extends React.Component {
         <form className="form-inline">
 
           <div className="form-group col-xs-12 col-sm-10">
-            <input type="text" className="form-control tarefa-text" placeholder="Tarefa..." nome="manolo"/>
+            <input type="text" ref="taskText" className="form-control tarefa-text" placeholder="Tarefa..."/>
           </div>
 
           <div className="form-group col-xs-12 col-sm-2">
-            <button className="btn btn-success">Cadastrar</button>
+            <button className="btn btn-success" ref="storeButton">Cadastrar</button>
           </div>
 
         </form>

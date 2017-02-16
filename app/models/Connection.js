@@ -21,10 +21,15 @@ class Connection {
   }
 
   insert(collection, object) {
-    this.connect()
-    .then(db => {
-      db.collection(collection).insertOne(object, this.result(err, result));
+    return new Promise((resolve, reject) => {
+      this.connect()
+      .then(db => {
+        db.collection(collection).insertOne(object, (err, result) => {
+          err ? reject(err) : resolve(result);
+        });
+      });
     });
+
   }
 
   find(collection, query) {

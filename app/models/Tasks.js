@@ -15,6 +15,14 @@ class Tasks extends Connection {
     });
   }
 
+  insert(object) {
+    return new Promise((resolve, reject) => {
+      this.insert('tasks', object).then(result => {
+        resolve(reject);
+      });
+    });
+  }
+
 
 }
 
