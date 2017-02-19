@@ -13,10 +13,7 @@ class TaskController extends React.Component {
 
   componentDidMount() {
 
-    this.getData().then(data => {
-      this.$deleteButton.on('click', this.deleteDoc.bind(this));
-      this.$statusButton.on('click', this.changeStatus.bind(this));
-    });
+    this.getData();
 
     this.$storeButoon.on('click', this.createTask.bind(this));
   }
@@ -107,6 +104,10 @@ class TaskController extends React.Component {
         );
       });
       this.setState({items: items});
+    })
+    .then(() => {
+      this.$deleteButton.on('click', this.deleteDoc.bind(this));
+      this.$statusButton.on('click', this.changeStatus.bind(this));
     });
   }
 
