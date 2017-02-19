@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const Connection = require('./models/Connection');
 const TasksRoute = require('./routes/TasksRoute');
 const Tasks = require('./models/Tasks');
+const mongodb = require('mongodb');
 
 class Server {
 
@@ -38,9 +39,11 @@ class Server {
       response.render(this.indexPage);
     });
 
-
+    //Task routes
     this.express.get('/tasks', this.tasksRoute.get.bind(this));
+    this.express.get('/tasks/:id', this.tasksRoute.delete.bind(this));
     this.express.post('/tasks/store', this.parseUrlencoded, this.tasksRoute.post.bind(this));
+    this.express.post('/tasks/update', this.parseUrlencoded, this.tasksRoute.update.bind(this));
 
     this.express.listen(3000);
 
